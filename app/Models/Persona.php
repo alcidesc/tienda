@@ -15,6 +15,7 @@ class Persona extends Model
     public $timestamps='true';
 
     protected $fillable=[
+        'foto',
         'nombre',
         'apellido',
         'direccion',

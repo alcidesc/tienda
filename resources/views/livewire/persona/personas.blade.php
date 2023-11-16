@@ -8,8 +8,14 @@
                     @include('livewire.persona.create')
                 @endif
             </div>
+                    @if (session()->has('toastr'))
+            <script>
+                const toastrOptions = @json(session('toastr.options', []));
+                toastr['{{ session('toastr.type', 'info') }}']('{{ session('toastr.message') }}', '', toastrOptions);
+            </script>
+        @endif
             <div class="col-md-12">
-                  <input wire:model="search" class="form-control" type="search" placeholder="Buscar proveedor">
+                  <input wire:model="search" class="form-control" type="search" placeholder="Buscar ">
             </div>
         </div>
         <br>
@@ -18,11 +24,13 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>IMAGEN</th>
                             <th>Nombres</th>
                             <th>apellido</th>
                             <th>telefono</th>
                             <th>Direcccion</th>
                             <th>fecha de nacimiento</th>
+                            <th>tu edad es</th>
                             <th>Acciones</th>
     
                         </tr>
@@ -30,11 +38,20 @@
                     <tbody>
                         @foreach ($personas as $prov)
                             <tr>
+                                <tr>
+                                    <td>
+                                        @if ($prov->foto)
+                                            <img src="{{ asset('/images/productos/' . $prov->foto) }}" alt="{{ $prov->nombre }}" width="50px">
+                                        @else
+                                            <span>Sin foto</span>
+                                        @endif
+                                    </td>
                                 <td>{{ $prov->nombre }}</td>
                                 <td>{{ $prov->apellido}}</td>
                                 <td>{{ $prov->telefono }}</td>
                                 <td>{{ $prov->direccion }}</td>
                                 <td>{{ $prov->fecha_nacimiento }}</td>
+                                <td>{{ $this->calcularEdad($prov->fecha_nacimiento) }}</td> <!-- Nueva celda para mostrar la edad -->
                                 <td>
                                     <button wire:click="edit({{ $prov->id }})" class="btn btn-sm btn-info">Editar</button>
                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal{{ $prov->id }}"><i class="far fa-trash-alt"></i></button>
@@ -61,7 +78,6 @@
                                 </td>
                             </tr>
                         @endforeach
-    
                     </tbody>
                 </table>
             @else

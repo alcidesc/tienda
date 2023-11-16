@@ -3,6 +3,13 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
+                <label for="exampleFormControlInput1">Nueva Foto:</label>
+                <input type="file" class="form-control" wire:model="fotoupdate" accept="image/jpeg, image/png, image/bmp">
+                @error('fotoupdate') <span class="text-danger">{{ $message }}</span>@enderror
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
                 <label for="exampleFormControlInput1">Nombre de la persona:</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre " wire:model="nombre">
                 @error('nombre') <span class="text-danger">{{ $message }}</span>@enderror
