@@ -32,6 +32,7 @@ class Personas extends Component{
         $this->telefono = '';
         $this->direccion = '';
         $this->fecha_nacimiento='';
+        $this->foto='';
 
     }
 
