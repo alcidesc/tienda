@@ -1,23 +1,16 @@
 <div>
-    <div>
-        <div class="row">
-            <div class="col-md-12"> 
-                @if($updateMode)
-                    @include('livewire.persona.update')
-                @else
-                    @include('livewire.persona.create')
-                @endif
-            </div>
-                    @if (session()->has('toastr'))
-            <script>
-                const toastrOptions = @json(session('toastr.options', []));
-                toastr['{{ session('toastr.type', 'info') }}']('{{ session('toastr.message') }}', '', toastrOptions);
-            </script>
-        @endif
-            <div class="col-md-12">
-                  <input wire:model="search" class="form-control" type="search" placeholder="Buscar ">
-            </div>
+    <div class="row">
+        <div class="col-md-12"> 
+            @if($updateMode)
+                @include('livewire.persona.update')
+            @else
+                @include('livewire.persona.create')
+            @endif
         </div>
+        <div class="col-md-12">
+              <input wire:model="search" class="form-control" type="search" placeholder="Buscar ">
+        </div>
+    </div>
         <br>
          <div class="row table-responsive">
             @if ($personas->count())
@@ -29,6 +22,7 @@
                             <th>apellido</th>
                             <th>telefono</th>
                             <th>Direcccion</th>
+                            <th>coreo</th>
                             <th>fecha de nacimiento</th>
                             <th>tu edad es</th>
                             <th>Acciones</th>
@@ -49,6 +43,7 @@
                                 <td>{{ $prov->nombre }}</td>
                                 <td>{{ $prov->apellido}}</td>
                                 <td>{{ $prov->telefono }}</td>
+                                <td>{{ $prov->direccion }}</td>
                                 <td>{{ $prov->direccion }}</td>
                                 <td>{{ $prov->fecha_nacimiento }}</td>
                                 <td>{{ $this->calcularEdad($prov->fecha_nacimiento) }}</td> <!-- Nueva celda para mostrar la edad -->

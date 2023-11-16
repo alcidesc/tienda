@@ -12,13 +12,13 @@ class Personas extends Component{
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    
+    public $collapsed="collapsed-card",$collapsedicon="fa-plus";
+    public $updateMode = false,$fila="id",$orden="desc";
     public $search='';
     
     public $nombre, $persona_id, $direccion, $apellido, $telefono,$fecha_nacimiento,
     $hoy,$fechaNacimiento,$foto,$fotoupdate,$nombreFoto;
     
-    public $updateMode = false;
 
     public function render(){
 
@@ -158,5 +158,13 @@ class Personas extends Component{
 
             return $edad->y; 
         }
-
+        public function collapsed(){
+            if($this->collapsed){
+                $this->collapsed="";
+                $this->collapsedicon="fa-minus";
+            }else{
+                $this->collapsed="collapsed-card";
+                $this->collapsedicon="fa-plus";
+            }
+        }
 }
